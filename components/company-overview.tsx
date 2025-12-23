@@ -32,9 +32,7 @@ export function CompanyOverview() {
             About Aladgold Dynamic Company Limited
           </h2>
           <p className="text-lg text-muted-foreground leading-relaxed">
-            An indigenous, multi-disciplinary company delivering comprehensive solutions across engineering,
-            construction, consultancy, energy, water resources, and procurement with strong compliance, technical depth,
-            and proven execution capability.
+            a multi-disciplinary company delivering integrated solutions across engineering, construction, energy, procurement, and computing technologies, combining strong compliance, technical expertise, and proven execution, with advanced digital, automation, and data-driven systems.
           </p>
         </div>
 

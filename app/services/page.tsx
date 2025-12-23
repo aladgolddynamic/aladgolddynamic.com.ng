@@ -2,7 +2,7 @@ import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Building2, Zap, Sun, Droplets, FileText, ShoppingCart, ArrowRight, CheckCircle2 } from "lucide-react"
+import { Building2, Zap, Sun, Droplets, FileText, ShoppingCart, ArrowRight, CheckCircle2, Monitor, Cloud } from "lucide-react"
 import Link from "next/link"
 
 export const metadata = {
@@ -108,6 +108,38 @@ export default function ServicesPage() {
         "Maintenance and after-sales support",
       ],
     },
+    {
+      icon: Monitor,
+      category: "IT Consultancy & Support",
+      description:
+        "Technology solutions, system integration, technical support, digital transformation, software development, IT infrastructure management",
+      color: "bg-indigo-500",
+      capabilities: [
+        "Custom software development and integration",
+        "IT infrastructure design and implementation",
+        "System integration and migration services",
+        "24/7 technical support and maintenance",
+        "Digital transformation consulting",
+        "Network setup and management",
+        "IT security assessments and solutions",
+      ],
+    },
+    {
+      icon: Cloud,
+      category: "Cloud Computing & Data Protection",
+      description:
+        "Cloud infrastructure, data security, backup solutions, cybersecurity services, cloud migration, data recovery",
+      color: "bg-sky-500",
+      capabilities: [
+        "Cloud infrastructure setup and management",
+        "Data encryption and security protocols",
+        "Automated backup and disaster recovery",
+        "Cybersecurity threat detection and response",
+        "Cloud migration and optimization",
+        "Data compliance and governance",
+        "Secure cloud storage solutions",
+      ],
+    },
   ]
 
   return (
@@ -125,11 +157,12 @@ export default function ServicesPage() {
           />
         </div>
         <div className="container mx-auto px-4 lg:px-6 relative z-10">
-          <div className="max-w-3xl">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-balance">Our Services</h1>
-            <p className="text-xl text-white/90 leading-relaxed">
-              Comprehensive solutions across six core service areas, delivering excellence in engineering, construction,
-              energy, and infrastructure development.
+          <div className="max-w-3xl mx-auto text-center">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-balance animate-fade-in-up">Our Services</h1>
+            <p className="text-xl text-white/90 leading-relaxed animate-fade-in-up animation-delay-200">
+              <strong>Engineering, Energy, and Computing Solutions Built for Performance</strong><br />
+              <br></br>
+              Delivering compliant, scalable, and technology-enabled services across infrastructure and digital systems.
             </p>
           </div>
         </div>

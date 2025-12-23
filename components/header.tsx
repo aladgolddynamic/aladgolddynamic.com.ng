@@ -11,10 +11,10 @@ export function Header() {
 
   const navigation = [
     { name: "Home", href: "/" },
-    { name: "Services", href: "#services" },
-    { name: "Projects", href: "#projects" },
-    { name: "About", href: "#about" },
-    { name: "Contact", href: "#contact" },
+    { name: "Services", href: "/services" },
+    { name: "Projects", href: "/projects" },
+    { name: "About", href: "/about" },
+    { name: "Contact", href: "/contact" },
   ]
 
   return (
@@ -42,9 +42,11 @@ export function Header() {
                 {item.name}
               </Link>
             ))}
-            <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90">
-              Get a Quote
-            </Button>
+            <Link href="/contact">
+              <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90">
+                Get a Quote
+              </Button>
+            </Link>
           </nav>
 
           {/* Mobile Menu Button */}
@@ -67,9 +69,11 @@ export function Header() {
                   {item.name}
                 </Link>
               ))}
-              <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 w-full">
-                Get a Quote
-              </Button>
+              <Link href="/contact">
+                <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 w-full">
+                  Get a Quote
+                </Button>
+              </Link>
             </div>
           </nav>
         )}

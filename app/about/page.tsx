@@ -29,10 +29,10 @@ export default function AboutPage() {
           />
         </div>
         <div className="container mx-auto px-4 lg:px-6 relative z-10">
-          <div className="max-w-3xl">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-balance">About Aladgold Dynamic</h1>
-            <p className="text-xl text-white/90 leading-relaxed">
-              A trusted partner in achieving business growth and sustainable development across Nigeria and beyond.
+          <div className="max-w-3xl mx-auto text-center">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-balance animate-fade-in-up">Who We Are</h1>
+            <p className="text-xl text-white/90 leading-relaxed font-bold animate-fade-in-up animation-delay-200">
+              Building the Infrastructure and Digital Intelligence That Power Sustainable Progress
             </p>
           </div>
         </div>

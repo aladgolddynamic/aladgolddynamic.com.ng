@@ -65,6 +65,33 @@ export function ProjectsSection() {
       description: "Technical equipment procurement for multiple government agencies",
       image: "/procurement-supplies-equipment.jpg",
     },
+    {
+      title: "Government Data Security Implementation",
+      category: "data-protection",
+      client: "Government",
+      location: "Abuja, FCT",
+      status: "Completed",
+      description: "Comprehensive data protection and cybersecurity solutions for government database",
+      image: "/cloud-computing-data-center-servers.jpg",
+    },
+    {
+      title: "Corporate Software Development Project",
+      category: "software-solutions",
+      client: "Corporate",
+      location: "Lagos State",
+      status: "Completed",
+      description: "Custom software development for inventory management and automation",
+      image: "/electrical-power-systems-installation.jpg",
+    },
+    {
+      title: "IT Consultancy for NGO Digital Transformation",
+      category: "consultancy",
+      client: "NGO",
+      location: "Kaduna State",
+      status: "Ongoing",
+      description: "Strategic IT consultancy and digital transformation advisory services",
+      image: "/water-borehole-drilling-nigeria.jpg",
+    },
   ]
 
   const categories = [
@@ -74,6 +101,9 @@ export function ProjectsSection() {
     { id: "water", label: "Water Resources" },
     { id: "electrical", label: "Electrical" },
     { id: "procurement", label: "Procurement" },
+    { id: "data-protection", label: "Data Protection" },
+    { id: "software-solutions", label: "Software Solutions" },
+    { id: "consultancy", label: "Consultancy" },
   ]
 
   const filteredProjects = filter === "all" ? projects : projects.filter((p) => p.category === filter)
@@ -142,9 +172,9 @@ export function ProjectsSection() {
         </div>
 
         <div className="text-center mt-12">
-          <Link href="/projects">
+          <Link href="/contact">
             <Button size="lg" variant="outline" className="group bg-transparent">
-              View All Projects
+              Get in Touch
               <Building2 className="ml-2 h-5 w-5 group-hover:scale-110 transition-transform" />
             </Button>
           </Link>

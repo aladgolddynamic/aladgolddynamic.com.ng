@@ -45,26 +45,6 @@ export function ComplianceSection() {
             </div>
           ))}
         </div>
-
-        <div className="mt-16 bg-white/10 backdrop-blur-sm rounded-2xl p-8 md:p-12 border border-white/20">
-          <div className="text-center">
-            <h3 className="text-2xl font-bold mb-6">Our Warranties & Assurance</h3>
-            <div className="grid md:grid-cols-3 gap-8">
-              <div>
-                <div className="text-4xl font-bold mb-2">5 Years</div>
-                <div className="text-sm text-white/80">Product Warranty</div>
-              </div>
-              <div>
-                <div className="text-4xl font-bold mb-2">20 Years</div>
-                <div className="text-sm text-white/80">Structural Warranty</div>
-              </div>
-              <div>
-                <div className="text-4xl font-bold mb-2">100%</div>
-                <div className="text-sm text-white/80">Asset Integrity Commitment</div>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
   )

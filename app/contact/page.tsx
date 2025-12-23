@@ -24,11 +24,10 @@ export default function ContactPage() {
           />
         </div>
         <div className="container mx-auto px-4 lg:px-6 relative z-10">
-          <div className="max-w-3xl">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-balance">Contact Us</h1>
-            <p className="text-xl text-white/90 leading-relaxed">
-              Ready to start your next project? Get in touch with our team for consultation, quotes, and project
-              inquiries.
+          <div className="max-w-3xl mx-auto text-center">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-balance animate-fade-in-up">Get In Touch</h1>
+            <p className="text-xl text-white/90 leading-relaxed animate-fade-in-up animation-delay-200">
+              Reach out for project enquiries, consultations, partnerships, or technical discussions. We respond promptly and professionally.
             </p>
           </div>
         </div>

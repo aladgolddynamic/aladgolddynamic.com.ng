@@ -1,6 +1,6 @@
 import Link from "next/link"
 import Image from "next/image"
-import { Facebook, Twitter, Linkedin, Mail, Youtube } from "lucide-react"
+import { Facebook, Twitter, Linkedin, Instagram } from "lucide-react"
 
 export function Footer() {
   const services = [
@@ -32,34 +32,28 @@ export function Footer() {
             </p>
             <div className="flex items-center gap-3">
               <Link
-                href="#"
+                href="https://web.facebook.com/profile.php?id=61585197586795"
                 className="h-10 w-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors"
               >
                 <Facebook className="h-5 w-5" />
               </Link>
               <Link
-                href="#"
+                href="https://x.com/aladgolddynamic"
                 className="h-10 w-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors"
               >
                 <Twitter className="h-5 w-5" />
+              </Link>
+              <Link
+                href="https://www.instagram.com/aladgold_dynamic/"
+                className="h-10 w-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors"
+              >
+                <Instagram className="h-5 w-5" />
               </Link>
               <Link
                 href="#"
                 className="h-10 w-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors"
               >
                 <Linkedin className="h-5 w-5" />
-              </Link>
-              <Link
-                href="#"
-                className="h-10 w-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors"
-              >
-                <Youtube className="h-5 w-5" />
-              </Link>
-              <Link
-                href="#"
-                className="h-10 w-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors"
-              >
-                <Mail className="h-5 w-5" />
               </Link>
             </div>
           </div>

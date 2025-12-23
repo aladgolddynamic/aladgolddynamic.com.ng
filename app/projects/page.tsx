@@ -87,11 +87,10 @@ export default function ProjectsPage() {
           />
         </div>
         <div className="container mx-auto px-4 lg:px-6 relative z-10">
-          <div className="max-w-3xl">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-balance">Our Projects</h1>
-            <p className="text-xl text-white/90 leading-relaxed">
-              Demonstrating depth, documentation, and execution strength across multiple sectors with over 230+
-              successfully completed projects.
+          <div className="max-w-3xl mx-auto text-center">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-balance animate-fade-in-up">Our Projects</h1>
+            <p className="text-xl text-white/90 leading-relaxed animate-fade-in-up animation-delay-200">
+              Our portfolio spans government, corporate, and development-sector engagements, integrating physical infrastructure with modern electrical, digital, and software systems to deliver sustainable, compliant, and high-impact outcomes. Each project highlights our commitment to quality, accountability, and results-driven delivery.
             </p>
           </div>
         </div>

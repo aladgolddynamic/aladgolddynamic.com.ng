@@ -16,21 +16,21 @@ export function HeroSection() {
         />
       </div>
 
-      <div className="container items-center mx-auto px-4 lg:px-6 py-32 relative z-10">
-        <div className="max-w-4xl items-center flex  w-full mx-auto text-center">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight text-balance animate-fade-in-up animation-delay-100">
+      <div className="container flex items-center justify-center h-full mx-auto px-4 lg:px-6 py-32 relative z-10">
+        <div className="max-w-4xl items-center flex flex-col justify-center w-full mx-auto text-center">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight text-balance animate-fade-in-up animation-delay-100 text-center mx-auto max-w-4xl">
             A Trusted Partner in Achieving Business Growth & Sustainable Development
           </h1>
 
-          <p className="text-lg md:text-xl text-white/90 mb-10 max-w-3xl mx-auto leading-relaxed animate-fade-in-up animation-delay-200">
+          <p className="text-lg md:text-xl text-white/90 mb-10 max-w-3xl mx-auto leading-relaxed animate-fade-in-up animation-delay-200 text-center">
             Delivering integrated solutions across engineering, construction, consultancy, energy, water resources, and
             procurement for government, corporate, and development partners.
           </p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in-up animation-delay-300">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in-up animation-delay-300 self-center">
             <Button
               size="lg"
-              className="bg-white text-primary hover:bg-white/90 h-14 px-8 text-base font-semibold group"
+              className="bg-white text-primary hover:bg-white/90 h-14 px-8 text-base font-semibold group text-center"
             >
               View Our Services
               <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
@@ -38,13 +38,13 @@ export function HeroSection() {
             <Button
               size="lg"
               variant="outline"
-              className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-primary h-14 px-8 text-base font-semibold"
+              className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-primary h-14 px-8 text-base font-semibold text-center"
             >
               View Completed Projects
             </Button>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-20 animate-fade-in-up animation-delay-400">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-20 animate-fade-in-up animation-delay-400 mx-auto justify-items-center">
             <div className="text-center">
               <div className="text-3xl md:text-4xl font-bold text-white mb-2">8+</div>
               <div className="text-sm text-white/80">Years Experience</div>

@@ -80,21 +80,19 @@ export function HeroCarousel() {
           </div>
 
           {/* Content */}
-          <div className="container mx-auto px-4 lg:px-6 py-32 relative z-10 h-full flex items-center">
-            <div className="max-w-4xl">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight text-balance animate-fade-in-up">
+          <div className="container mx-auto px-4 lg:px-6 py-32 relative z-10 h-full flex items-center justify-center">
+            <div className="max-w-4xl mx-auto text-center flex flex-col items-center justify-center">
+              <p className="text-sm text-white mb-4">RC: 1449165 | Since 2017</p>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight text-balance animate-fade-in-up text-center mx-auto">
                 A Trusted Partner in Achieving Business Growth & Sustainable Development
               </h1>
-
-              <h2 className="text-2xl md:text-3xl text-white/95 mb-4 font-semibold animate-fade-in-up animation-delay-100">
+              <h2 className="text-2xl md:text-3xl text-white/95 mb-4 font-semibold animate-fade-in-up animation-delay-100 text-center">
                 {slide.subtitle}
               </h2>
-
-              <p className="text-lg md:text-xl text-white/90 mb-10 leading-relaxed animate-fade-in-up animation-delay-200">
+              <p className="text-lg md:text-xl text-white/90 mb-10 leading-relaxed animate-fade-in-up animation-delay-200 text-center">
                 {slide.description}
               </p>
-
-              <div className="flex items-start animate-fade-in-up animation-delay-300">
+              <div className="flex items-center justify-center animate-fade-in-up animation-delay-300 w-full">
                 <Button
                   onClick={scrollToServices}
                   size="lg"
