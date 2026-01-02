@@ -1,21 +1,34 @@
-"use client"
-
-import { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
-import { Menu, X } from "lucide-react"
+import { createClient } from "@/utils/supabase/server"
+import { NavbarMobile } from "./navbar-mobile"
+import { NavigationItem } from "@/lib/types"
 
-export function Header() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
+export async function Header() {
+  const supabase = await createClient()
 
-  const navigation = [
-    { name: "Home", href: "/" },
-    { name: "Services", href: "/services" },
-    { name: "Projects", href: "/projects" },
-    { name: "About", href: "/about" },
-    { name: "Contact", href: "/contact" },
+  const { data: navigation } = await supabase
+    .from('NavigationItem')
+    .select('*')
+    .eq('type', 'header')
+    .order('order', { ascending: true })
+
+  // Fallback if no items in DB (e.g. initial state)
+  const defaultNav = [
+    { id: "home-link", label: "Home", href: "/", order: 1, type: "header", visible: true },
+    { id: "services-link", label: "Services", href: "/services", order: 2, type: "header", visible: true },
+    { id: "projects-link", label: "Projects", href: "/projects", order: 3, type: "header", visible: true },
+    { id: "news-link", label: "News", href: "/news", order: 4, type: "header", visible: true },
+    { id: "careers-link", label: "Careers", href: "/careers", order: 5, type: "header", visible: true },
+    { id: "about-link", label: "About", href: "/about", order: 6, type: "header", visible: true },
+    { id: "contact-link", label: "Contact", href: "/contact", order: 7, type: "header", visible: true },
+    { id: "admin-link", label: "Admin", href: "/admin", order: 8, type: "header", visible: true },
   ]
+
+  const items = (navigation && navigation.length > 0)
+    ? navigation.map((item: any) => ({ id: item.id, label: item.label, href: item.href }))
+    : defaultNav
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
@@ -31,15 +44,14 @@ export function Header() {
             />
           </Link>
 
-          {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center gap-8">
-            {navigation.map((item) => (
+            {items.map((item: any) => (
               <Link
-                key={item.name}
+                key={item.id || item.label}
                 href={item.href}
                 className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors"
               >
-                {item.name}
+                {item.label}
               </Link>
             ))}
             <Link href="/contact">
@@ -49,34 +61,9 @@ export function Header() {
             </Link>
           </nav>
 
-          {/* Mobile Menu Button */}
-          <button className="lg:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label="Toggle menu">
-            {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-          </button>
+          {/* Mobile Menu Button & Nav handled by client component */}
+          <NavbarMobile items={items} />
         </div>
-
-        {/* Mobile Navigation */}
-        {isMenuOpen && (
-          <nav className="lg:hidden py-4 border-t border-border">
-            <div className="flex flex-col gap-4">
-              {navigation.map((item) => (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  className="text-sm font-medium text-foreground/80 hover:text-foreground py-2"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {item.name}
-                </Link>
-              ))}
-              <Link href="/contact">
-                <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 w-full">
-                  Get a Quote
-                </Button>
-              </Link>
-            </div>
-          </nav>
-        )}
       </div>
     </header>
   )

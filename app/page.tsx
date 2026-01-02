@@ -10,8 +10,20 @@ import { ClientsSection } from "@/components/clients-section"
 import { ComplianceSection } from "@/components/compliance-section"
 import { ContactSection } from "@/components/contact-section"
 import { Footer } from "@/components/footer"
+import { JobSection } from "@/components/job-section"
+import { createClient } from "@/utils/supabase/server"
 
-export default function Home() {
+export default async function Home() {
+  const supabase = await createClient()
+
+  const { data: jobs } = await supabase
+    .from('Job')
+    .select('*')
+    .eq('status', 'OPEN')
+    .eq('pageSlug', 'home')
+    .order('createdAt', { ascending: false })
+    .limit(3)
+
   return (
     <>
       <Loader />
@@ -22,6 +34,11 @@ export default function Home() {
         <ServicesSection />
         <ProjectsSection />
         <ImpactSection />
+        <JobSection
+          jobs={jobs || []}
+          title="Featured Career Opportunities"
+          subtitle="Join our world-class team and build the future of Nigerian infrastructure."
+        />
         <WhyChooseSection />
         <ClientsSection />
         <ComplianceSection />

@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react"
+import Image from "next/image"
 
 export function HeroCarousel() {
   const [currentSlide, setCurrentSlide] = useState(0)
@@ -64,16 +65,19 @@ export function HeroCarousel() {
       {slides.map((slide, index) => (
         <div
           key={index}
-          className={`absolute inset-0 transition-opacity duration-1000 ${
-            index === currentSlide ? "opacity-100" : "opacity-0"
-          }`}
+          className={`absolute inset-0 transition-opacity duration-1000 ${index === currentSlide ? "opacity-100" : "opacity-0"
+            }`}
         >
           {/* Background Image */}
           <div className="absolute inset-0">
-            <img
-              src={slide.image || "/placeholder.svg?height=1080&width=1920"}
+            <Image
+              src={slide.image}
               alt={slide.subtitle}
-              className="w-full h-full object-cover"
+              fill
+              className="object-cover"
+              priority={index === 0}
+              sizes="100vw"
+              quality={85}
             />
             {/* Overlay */}
             <div className="absolute inset-0 bg-gradient-to-r from-primary/95 via-primary/85 to-primary/70" />
@@ -129,9 +133,8 @@ export function HeroCarousel() {
           <button
             key={index}
             onClick={() => setCurrentSlide(index)}
-            className={`h-2 rounded-full transition-all ${
-              index === currentSlide ? "w-12 bg-white" : "w-2 bg-white/50 hover:bg-white/70"
-            }`}
+            className={`h-2 rounded-full transition-all ${index === currentSlide ? "w-12 bg-white" : "w-2 bg-white/50 hover:bg-white/70"
+              }`}
             aria-label={`Go to slide ${index + 1}`}
           />
         ))}

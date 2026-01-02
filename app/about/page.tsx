@@ -6,6 +6,8 @@ import { WhyChooseSection } from "@/components/why-choose-section"
 import { ComplianceSection } from "@/components/compliance-section"
 import { Card } from "@/components/ui/card"
 import { Award, Target, Eye } from "lucide-react"
+import { createClient } from "@/utils/supabase/server"
+import { JobSection } from "@/components/job-section"
 
 export const metadata = {
   title: "About Us - Aladgold Dynamic Company Limited",
@@ -13,7 +15,26 @@ export const metadata = {
     "Learn about Aladgold Dynamic Company Limited - a trusted Nigerian engineering and construction firm delivering excellence since 2017.",
 }
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const supabase = await createClient()
+
+  const { data: profile } = await supabase
+    .from('CompanyProfile')
+    .select('*')
+    .eq('id', 'default')
+    .maybeSingle()
+
+  const { data: jobs } = await supabase
+    .from('Job')
+    .select('*')
+    .eq('status', 'OPEN')
+    .eq('pageSlug', 'about')
+    .order('createdAt', { ascending: false })
+
+  const mission = profile?.mission || "To deliver world-class engineering, construction, and infrastructure solutions that drive sustainable development and exceed client expectations through innovation, quality, and integrity."
+  const vision = profile?.vision || "To be the leading engineering and construction firm in Nigeria, recognized for excellence, innovation, and our contribution to national infrastructure development."
+  const values = profile?.values || "Excellence, integrity, innovation, safety, and sustainability guide every project we undertake, ensuring lasting value for our clients and communities."
+
   return (
     <main className="min-h-screen">
       <Header />
@@ -24,7 +45,7 @@ export default function AboutPage() {
           <div
             className="absolute inset-0"
             style={{
-              backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fillRule='evenodd'%3E%3Cg fill='%23ffffff' fillOpacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+              backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fillRule='evenodd'%3E%3Cg fill='%23ffffff' fillOpacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
             }}
           />
         </div>
@@ -50,8 +71,7 @@ export default function AboutPage() {
               </div>
               <h3 className="text-2xl font-bold text-card-foreground mb-4">Our Mission</h3>
               <p className="text-muted-foreground leading-relaxed">
-                To deliver world-class engineering, construction, and infrastructure solutions that drive sustainable
-                development and exceed client expectations through innovation, quality, and integrity.
+                {mission}
               </p>
             </Card>
 
@@ -61,8 +81,7 @@ export default function AboutPage() {
               </div>
               <h3 className="text-2xl font-bold text-card-foreground mb-4">Our Vision</h3>
               <p className="text-muted-foreground leading-relaxed">
-                To be the leading engineering and construction firm in Nigeria, recognized for excellence, innovation,
-                and our contribution to national infrastructure development.
+                {vision}
               </p>
             </Card>
 
@@ -72,8 +91,7 @@ export default function AboutPage() {
               </div>
               <h3 className="text-2xl font-bold text-card-foreground mb-4">Our Values</h3>
               <p className="text-muted-foreground leading-relaxed">
-                Excellence, integrity, innovation, safety, and sustainability guide every project we undertake, ensuring
-                lasting value for our clients and communities.
+                {values}
               </p>
             </Card>
           </div>
@@ -84,7 +102,10 @@ export default function AboutPage() {
       <WhyChooseSection />
       <ComplianceSection />
 
+      <JobSection jobs={jobs || []} title="Join Our Team" subtitle="Be part of our mission and vision." />
+
       <Footer />
     </main>
   )
 }
+

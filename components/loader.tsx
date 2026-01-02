@@ -4,9 +4,11 @@ import { useEffect, useState } from "react"
 import Image from "next/image"
 
 export function Loader() {
+  const [mounted, setMounted] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
+    setMounted(true)
     const timer = setTimeout(() => {
       setIsLoading(false)
     }, 3000)
@@ -14,7 +16,7 @@ export function Loader() {
     return () => clearTimeout(timer)
   }, [])
 
-  if (!isLoading) return null
+  if (!mounted || !isLoading) return null
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-white">

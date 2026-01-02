@@ -1,74 +1,49 @@
 import { NextResponse } from "next/server"
+import { createClient } from "@/utils/supabase/server"
+import { Resend } from 'resend'
+
+const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null
 
 export async function POST(request: Request) {
   try {
     const body = await request.json()
-    const { name, email, phone, organization, message } = body
+    const { name, email, subject, message, phone, service } = body
 
-    // Validate required fields
-    if (!name || !email || !phone || !message) {
-      return NextResponse.json({ error: "Missing required fields" }, { status: 400 })
+    const supabase = await createClient()
+
+    const { data: contact, error } = await supabase
+      .from('ContactSubmission')
+      .insert({
+        name,
+        email,
+        subject,
+        message,
+        phone,
+        service,
+      })
+      .select()
+      .single()
+
+    if (error) throw error
+
+    // Send email notification if Resend is configured
+    if (resend) {
+      try {
+        await resend.emails.send({
+          from: 'Aladgold Contact <onboarding@resend.dev>',
+          to: 'aladgolddynamic@gmail.com',
+          subject: `New Contact Submission: ${subject}`,
+          text: `Name: ${name}\nEmail: ${email}\nPhone: ${phone || 'N/A'}\nService: ${service || 'General Inquiry'}\n\nMessage:\n${message}`,
+        })
+      } catch (emailError) {
+        console.error("[SEND_EMAIL_ERROR]", emailError)
+        // Don't fail the request if email fails
+      }
     }
 
-    // Email content
-    const emailContent = `
-New Contact Form Submission from Aladgold Dynamic Website
-
-Name: ${name}
-Email: ${email}
-Phone: ${phone}
-Organization: ${organization || "Not provided"}
-
-Message:
-${message}
-
----
-Sent from Aladgold Dynamic Company Limited website
-    `.trim()
-
-    const resendApiKey = process.env.RESEND_API_KEY
-
-    if (!resendApiKey) {
-      console.error("[v0] RESEND_API_KEY is not set")
-      return NextResponse.json(
-        { error: "Email service not configured. Please contact us directly at aladgolddynamic@gmail.com" },
-        { status: 500 },
-      )
-    }
-
-    const emailResponse = await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${resendApiKey}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        from: "Aladgold Website <onboarding@resend.dev>",
-        to: ["aladgolddynamic@gmail.com"], // Updated to aladgolddynamic@gmail.com
-        reply_to: email,
-        subject: `New Contact Form: ${name} - ${organization || "Individual"}`,
-        text: emailContent,
-      }),
-    })
-
-    if (!emailResponse.ok) {
-      const errorData = await emailResponse.json()
-      console.error("[v0] Resend API error:", errorData)
-      return NextResponse.json(
-        { error: "Failed to send email. Please try again or contact us directly." },
-        { status: 500 },
-      )
-    }
-
-    const data = await emailResponse.json()
-    console.log("[v0] Email sent successfully:", data)
-
-    return NextResponse.json({ success: true, message: "Message sent successfully!" }, { status: 200 })
+    return NextResponse.json(contact)
   } catch (error) {
-    console.error("[v0] Error processing contact form:", error)
-    return NextResponse.json(
-      { error: "An error occurred. Please try again later or contact us directly at aladgolddynamic@gmail.com" },
-      { status: 500 },
-    )
+    console.error("[CONTACT_POST]", error)
+    return NextResponse.json({ error: "Internal Server Error" }, { status: 500 })
   }
 }

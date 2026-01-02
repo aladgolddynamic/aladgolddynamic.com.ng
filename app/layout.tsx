@@ -1,8 +1,8 @@
 import type React from "react"
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
-import { Analytics } from "@vercel/analytics/next"
-import { SpeedInsights } from "@vercel/speed-insights/next"
+import { Analytics } from "@vercel/analytics/react"
+import { SpeedInsights } from "@vercel/speed-insights/react"
 import "./globals.css"
 
 const inter = Inter({ subsets: ["latin"], display: "swap" })
@@ -58,7 +58,11 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  generator: "v0.app",
+  generator: "Aladgold Dynamic Systems",
+  metadataBase: new URL("https://aladgolddynamic.com"),
+  alternates: {
+    canonical: "/",
+  },
   icons: {
     icon: [
       {
@@ -78,15 +82,18 @@ export const metadata: Metadata = {
   },
 }
 
+import { Toaster } from "@/components/ui/sonner"
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
-      <body className={`${inter.className} font-sans antialiased`}>
+    <html lang="en" suppressHydrationWarning>
+      <body className={`${inter.className} font-sans antialiased`} suppressHydrationWarning>
         {children}
+        <Toaster />
         <Analytics />
         <SpeedInsights />
       </body>
