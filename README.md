@@ -41,11 +41,6 @@ The system uses a relational schema defined in `prisma/schema.prisma`:
 ## 🔐 Admin Credentials
 
 > [!IMPORTANT]
-> These are the default credentials generated during seeding. It is highly recommended to change the password after the first login.
-
-| User Type | Email | Password |
-| :--- | :--- | :--- |
-| **Super Admin** | `admin@aladgold.com` | `admin123` |
 
 ## 🛠️ Getting Started
 
