@@ -13,5 +13,5 @@ export const middleware = async (request: NextRequest) => {
 
 export const config = {
     // https://nextjs.org/docs/app/building-your-application/routing/middleware#matcher
-    matcher: ["/admin/:path*", "/((?!api|_next/static|_next/image|.*\\.png$).*)"],
+    matcher: ["/admin/:path*", "/api/admin/:path*", "/((?!_next/static|_next/image|.*\\.png$).*)"],
 }
