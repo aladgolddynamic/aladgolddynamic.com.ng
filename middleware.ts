@@ -2,7 +2,7 @@ import { auth } from "./auth"
 import { updateSession } from "@/utils/supabase/middleware"
 import { type NextRequest } from "next/server"
 
-export const proxy = async (request: NextRequest) => {
+export const middleware = async (request: NextRequest) => {
     // Update Supabase session
     const response = await updateSession(request)
 

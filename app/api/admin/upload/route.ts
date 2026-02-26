@@ -1,8 +1,6 @@
 import { NextResponse } from "next/server"
 import { auth } from "@/auth"
-import { writeFile } from "fs/promises"
-import { join } from "path"
-import { mkdir } from "fs/promises"
+import { createBrowserClient } from "@supabase/ssr"
 import { v4 as uuidv4 } from "uuid"
 
 export async function POST(request: Request) {
@@ -19,26 +17,35 @@ export async function POST(request: Request) {
             return NextResponse.json({ error: "No file provided" }, { status: 400 })
         }
 
+        const supabase = createBrowserClient(
+            process.env.NEXT_PUBLIC_SUPABASE_URL!,
+            process.env.SUPABASE_SERVICE_ROLE_KEY!
+        )
+
         const bytes = await file.arrayBuffer()
         const buffer = Buffer.from(bytes)
-
-        // Ensure upload directory exists
-        const uploadDir = join(process.cwd(), "public", "uploads")
-        try {
-            await mkdir(uploadDir, { recursive: true })
-        } catch (e) {
-            // Directory might already exist
-        }
 
         // Generate unique filename
         const fileExtension = file.name.split(".").pop()
         const fileName = `${uuidv4()}.${fileExtension}`
-        const path = join(uploadDir, fileName)
 
-        await writeFile(path, buffer)
-        const fileUrl = `/uploads/${fileName}`
+        const { data, error } = await supabase.storage
+            .from("images")
+            .upload(fileName, buffer, {
+                contentType: file.type,
+                upsert: false
+            })
 
-        return NextResponse.json({ url: fileUrl })
+        if (error) {
+            console.error("[SUPABASE_UPLOAD_ERROR]", error)
+            return NextResponse.json({ error: "Upload to storage failed" }, { status: 500 })
+        }
+
+        const { data: { publicUrl } } = supabase.storage
+            .from("images")
+            .getPublicUrl(fileName)
+
+        return NextResponse.json({ url: publicUrl })
     } catch (error) {
         console.error("[UPLOAD_POST]", error)
         return NextResponse.json({ error: "Internal Server Error" }, { status: 500 })
